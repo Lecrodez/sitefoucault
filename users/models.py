@@ -3,8 +3,8 @@ from django.db import models
 
 
 class User(AbstractUser):
-    avatar = models.ImageField(upload_to="users/%Y/%m/%d", blank=True, null=True, verbose_name="Фотография")
-    roles = models.ForeignKey('Roles', on_delete=models.PROTECT, default=1)
+    # avatar = models.ImageField(upload_to="users/%Y/%m/%d", blank=True, null=True, verbose_name="Фотография")
+    roles = models.ForeignKey('Roles', on_delete=models.PROTECT)
 
 
     def __str__(self):
