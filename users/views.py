@@ -1,29 +1,23 @@
-from django.forms import model_to_dict
+from django.contrib import messages
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework import generics
 
-from .models import User
-from .serializers import UserSerializer
+from users.forms import UserForm
 
 
-# class UserAPIView(generics.ListAPIView):
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer
+# def login_user(request):
+#     if request.method == 'POST':
+#         form = UserForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, 'Вы успешно зарегистрированы!')
+#             return redirect('login')  # Перенаправление на страницу входа
+#     else:
+#         form = UserForm()
+#     return render(request, 'login.html', {'form': form})
 
-class UserAPIView(APIView):
-    def post(self, request):
-        serializer = UserSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
+def login_user(request):
+    return HttpResponse("login")
 
-        user_new = User.objects.create(
-            username=request.data['username'],
-            email=request.data['email'],
-            roles_id=request.data['roles_id']
-        )
-        return Response({'user': UserSerializer(user_new).data})
-
-    def get(self, request):
-        w = User.objects.all()
-        return Response({'users': UserSerializer(w, many=True).data})
+def logout_user(request):
+    return HttpResponse("logout")
