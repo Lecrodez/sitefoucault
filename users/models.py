@@ -3,7 +3,7 @@ from django.db import models
 
 
 class User(AbstractUser):
-    avatar = models.ImageField(upload_to="users/%Y/%m/%d", blank=True, null=True, verbose_name="Фотография")
+    avatar = models.ImageField(upload_to="users/%Y/%m/%d", blank=True, null=True, verbose_name="Фотография", default="default/placeholder.png")
     roles = models.ForeignKey('Roles', on_delete=models.PROTECT)
 
 

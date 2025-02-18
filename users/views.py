@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
-from users.forms import UserForm
+# from users.forms import UserForm
 
 
 # def login_user(request):
