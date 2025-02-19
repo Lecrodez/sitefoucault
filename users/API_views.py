@@ -18,9 +18,10 @@ class UserAPIView(APIView):
         serializer.is_valid(raise_exception=True)
 
         user_new = User.objects.create(
-            username=request.data['username'],
+            first_name=request.data['first_name'],
+            last_name=request.data['last_name'],
             email=request.data['email'],
-            roles_id=request.data['roles_id']
+            roles_id=request.data['roles_id'],
         )
         return Response({'user': UserSerializer(user_new).data})
 

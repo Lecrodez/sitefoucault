@@ -32,3 +32,4 @@ class UserSerializer(serializers.Serializer):
     roles_id = serializers.IntegerField()
     is_staff = serializers.BooleanField(read_only=True)
     is_active = serializers.BooleanField(read_only=True)
+    avatar = serializers.ImageField(read_only=True)
