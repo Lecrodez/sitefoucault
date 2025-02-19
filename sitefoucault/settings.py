@@ -80,7 +80,7 @@ WSGI_APPLICATION = "sitefoucault.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',  # имя вашей базы данных
+        'NAME': 'sitefoucault',  # имя вашей базы данных
         'USER': 'postgres',      # имя пользователя
         'PASSWORD': '120821',  # пароль пользователя
         'HOST': 'localhost',    # адрес сервера базы данных
@@ -134,3 +134,13 @@ AUTH_USER_MODEL = 'users.User'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
+
+
+
+# AUTHENTICATION_BACKENDS = [
+#     'django.contrib.auth.backends.ModelBackend',
+#     'users.authentication.EmailAuthBackend',
+# ]

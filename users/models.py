@@ -3,12 +3,14 @@ from django.db import models
 
 
 class User(AbstractUser):
+    email = models.EmailField(unique=True)
+    username = None
     avatar = models.ImageField(upload_to="users/%Y/%m/%d", blank=True, null=True, verbose_name="Фотография", default="default/placeholder.png")
-    roles = models.ForeignKey('Roles', on_delete=models.PROTECT)
+    roles = models.ForeignKey('Roles', on_delete=models.PROTECT, blank=False)
 
 
     def __str__(self):
-        return self.username
+        return self.email
 
 
 class Roles(models.Model):
