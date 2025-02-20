@@ -140,7 +140,7 @@ LOGOUT_REDIRECT_URL = 'home'
 
 
 
-# AUTHENTICATION_BACKENDS = [
-#     'django.contrib.auth.backends.ModelBackend',
-#     'users.authentication.EmailAuthBackend',
-# ]
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'users.authentication.EmailAuthBackend',
+]

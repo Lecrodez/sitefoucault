@@ -4,7 +4,6 @@ from django.db import models
 
 class User(AbstractUser):
     email = models.EmailField(unique=True)
-    username = None
     avatar = models.ImageField(upload_to="users/%Y/%m/%d", blank=True, null=True, verbose_name="Фотография", default="default/placeholder.png")
     roles = models.ForeignKey('Roles', on_delete=models.PROTECT, blank=False)
 
