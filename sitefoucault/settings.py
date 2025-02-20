@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     "users.apps.UsersConfig",
     "surveys.apps.SurveysConfig",
     'rest_framework',
+    'drf_yasg',
+    'rest_framework_swagger',
+    "myapi.apps.MyapiConfig",
 ]
 
 MIDDLEWARE = [
@@ -137,7 +140,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
-
 
 
 AUTHENTICATION_BACKENDS = [

@@ -17,9 +17,30 @@ class User(AbstractUser):
     def __str__(self):
         return self.email
 
+    class Meta:
+        verbose_name = 'user'
+        verbose_name_plural = 'users'
+
+    groups = models.ManyToManyField(
+        'auth.Group',
+        related_name='users_user_set',  # Уникальное имя для users.User
+        blank=True,
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        related_name='users_user_permissions_set',  # Уникальное имя для users.User
+        blank=True,
+    )
+
 
 class Roles(models.Model):
     name = models.CharField(max_length=100, db_index=True)
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = 'role'
+        verbose_name_plural = 'roles'
+
+
