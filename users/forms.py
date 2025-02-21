@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django import forms
 
-from .models import User
+# from .models import User
 
 
 """Проверяет, что строка содержит только русские буквы, пробелы и дефисы."""

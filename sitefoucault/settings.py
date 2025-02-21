@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     "surveys.apps.SurveysConfig",
     'rest_framework',
     'drf_yasg',
+    'djoser',
+    'rest_framework.authtoken',
     'rest_framework_swagger',
     "myapi.apps.MyapiConfig",
 ]
@@ -133,7 +135,7 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'myapi.User'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -146,3 +148,11 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'users.authentication.EmailAuthBackend',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
