@@ -29,7 +29,7 @@ from rest_framework import permissions
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="Snippets API",
+        title="Sitefoucault API",
         default_version='v1',
         description="Test description",
         terms_of_service="https://www.google.com/policies/terms/",
@@ -39,7 +39,7 @@ schema_view = get_schema_view(
     public=True,
     permission_classes=(permissions.AllowAny,),
 )
-from users.API_views import UserAPIView
+# from users.API_views import UserAPIView
 
 urlpatterns = [
     path('swagger-ui/', schema_view.with_ui('swagger', cache_timeout=0), name='swagger-ui'),
@@ -50,8 +50,7 @@ urlpatterns = [
     ),
     path("admin/", admin.site.urls),
     path("", include("surveys.urls")),
-    # path("api/v1/drf-auth/", include('rest_framework.urls')),
-    # path("api/v1/users/", UserAPIView.as_view()),
     path("users/", include('users.urls', namespace='users')),
-    path("api/", include('myapi.urls'))
+    path("api/", include('myapi.urls')),
+    re_path(r'^auth/', include('djoser.urls.authtoken')),
 ]

@@ -1,12 +1,12 @@
 from django.contrib import admin
-from users import models
+from . import models
 
 
-class UserAdmin(admin.ModelAdmin):
+class UsersAdmin(admin.ModelAdmin):
     pass
 
 
-admin.site.register(models.User, UserAdmin)
+admin.site.register(models.User, UsersAdmin)
 
 
 class RolesAdmin(admin.ModelAdmin):

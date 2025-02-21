@@ -1,16 +1,15 @@
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, ListCreateAPIView, CreateAPIView
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.views import APIView
+
 from . import serializers
-from users import models
+from . import models
+from .serializers import UserRegistrationSerializer
 
-
-# class CategoryListAPIView(ListAPIView):
-#     serializer_class = serializers.CategorySerializer
-#
-#     def get_queryset(self):
-#         return models.Category.objects.all()
 
 class UserListAPIView(ListAPIView):
     serializer_class = serializers.UserSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly, )
 
     def get_queryset(self):
         return models.User.objects.all()
@@ -21,3 +20,8 @@ class RolesListAPIView(ListAPIView):
 
     def get_queryset(self):
         return models.Roles.objects.all()
+
+
+class RegisterAPIView(CreateAPIView):
+    serializer_class = UserRegistrationSerializer
+
