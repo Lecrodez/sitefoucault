@@ -50,7 +50,6 @@ urlpatterns = [
     ),
     path("admin/", admin.site.urls),
     path("", include("surveys.urls")),
-    path("users/", include('users.urls', namespace='users')),
     path("api/", include('myapi.urls')),
     re_path(r'^auth/', include('djoser.urls.authtoken')),
 ]

@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django_extensions",
     "django.contrib.staticfiles",
-    "users.apps.UsersConfig",
     "surveys.apps.SurveysConfig",
     'rest_framework',
     'drf_yasg',
