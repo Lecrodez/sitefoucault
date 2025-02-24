@@ -15,13 +15,6 @@ class UserListAPIView(ListAPIView):
         return models.User.objects.all()
 
 
-class RolesListAPIView(ListAPIView):
-    serializer_class = serializers.RolesSerializers
-
-    def get_queryset(self):
-        return models.Roles.objects.all()
-
-
 class RegisterAPIView(CreateAPIView):
     serializer_class = UserRegistrationSerializer
 
