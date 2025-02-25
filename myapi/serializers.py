@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework.renderers import JSONRenderer
 
-from .models import User, Survey
+from .models import User, Survey, AnswerType, Answer, QuestionType, Question
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -28,9 +28,56 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         user.save()
         return user
 
-#
-# class SurveyConstructSerializer(serializers.ModelSerializer):
+
+# class SurveySerializer(serializers.ModelSerializer):
 #
 #     class Meta:
-#         model = Survey,
-#         fields = []
+#         model = Survey
+#         fields = "__all__"
+
+
+class QuestionSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Question
+        fields = "__all__"
+
+
+class SurveySerializer(serializers.ModelSerializer):
+    questions = QuestionSerializer(many=True)  # Вложенный сериализатор для вопросов
+    created_by = UserSerializer(read_only=True)  # Сериализатор для создателя опросника
+
+    class Meta:
+        model = Survey
+        fields = ['id', 'title', 'description', 'created_by', 'created_at', 'updated_at', 'questions']
+
+    def create(self, validated_data):
+        # Извлекаем данные для вопросов
+        questions_data = validated_data.pop('questions')
+        # Создаем опросник
+        survey = Survey.objects.create(**validated_data)
+        # Создаем вопросы
+        for question_data in questions_data:
+            Question.objects.create(survey=survey, **question_data)
+        return survey
+
+
+class QuestionTypeSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = QuestionType
+        fields = "__all__"
+
+
+class AnswerSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Answer
+        fields = "__all__"
+
+
+class AnswerTypeSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = AnswerType
+        fields = "__all__"

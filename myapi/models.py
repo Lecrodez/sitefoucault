@@ -37,6 +37,8 @@ class Survey(models.Model):
     description = models.CharField(max_length=255, verbose_name="Описание")
     sender_user = models.ForeignKey('User', on_delete=models.CASCADE, verbose_name="Отправитель", related_name="sender_id")
     recipient_user = models.ManyToManyField('User', verbose_name="Получатель", related_name="recipient_id")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
@@ -58,7 +60,7 @@ class QuestionType(models.Model):
         return self.name
 
 
-class Answers(models.Model):
+class Answer(models.Model):
     value = models.CharField(max_length=255, verbose_name="Ответ", db_index=True)
     answer_type = models.ForeignKey("AnswerType", on_delete=models.CASCADE, related_name="answer_type_id")
     recipient_user = models.ForeignKey("User", on_delete=models.PROTECT, related_name="recipient_user_id")

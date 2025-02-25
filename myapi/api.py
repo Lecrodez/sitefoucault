@@ -1,10 +1,12 @@
+from rest_framework import permissions
 from rest_framework.generics import ListAPIView, ListCreateAPIView, CreateAPIView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.views import APIView
 
 from . import serializers
 from . import models
-from .serializers import UserRegistrationSerializer
+from .models import Survey
+from .serializers import UserRegistrationSerializer, SurveySerializer
 
 
 class UserListAPIView(ListAPIView):
@@ -17,4 +19,15 @@ class UserListAPIView(ListAPIView):
 
 class RegisterAPIView(CreateAPIView):
     serializer_class = UserRegistrationSerializer
+
+
+class SurveyCreateView(CreateAPIView):
+    queryset = Survey.objects.all()
+    serializer_class = SurveySerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        # Автоматически назначаем текущего пользователя как создателя опросника
+        serializer.save(created_by=self.request.user)
+
 
