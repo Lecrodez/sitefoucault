@@ -15,14 +15,14 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email', 'role_id', 'password']
+        fields = ['first_name', 'last_name', 'email', 'roles', 'password']
 
     def create(self, validated_data):
         user = User(
             first_name=validated_data['first_name'],
             last_name=validated_data['last_name'],
             email=validated_data['email'],
-            roles=validated_data['role_id']
+            roles=validated_data['roles']
         )
         user.set_password(validated_data['password'])  # Хеширование пароля
         user.save()
@@ -40,26 +40,27 @@ class QuestionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Question
-        fields = "__all__"
+        fields = ['value', 'question_type']
 
 
 class SurveySerializer(serializers.ModelSerializer):
-    questions = QuestionSerializer(many=True)  # Вложенный сериализатор для вопросов
-    created_by = UserSerializer(read_only=True)  # Сериализатор для создателя опросника
+    questions = QuestionSerializer(many=True)
+    recipient_user = serializers.PrimaryKeyRelatedField(many=True, queryset=User.objects.all())
 
     class Meta:
         model = Survey
-        fields = ['id', 'title', 'description', 'created_by', 'created_at', 'updated_at', 'questions']
+        fields = ['title', 'description', 'questions', 'recipient_user']
 
     def create(self, validated_data):
-        # Извлекаем данные для вопросов
         questions_data = validated_data.pop('questions')
-        # Создаем опросник
+        recipient_users_data = validated_data.pop('recipient_user')
         survey = Survey.objects.create(**validated_data)
-        # Создаем вопросы
+        survey.recipient_user.set(recipient_users_data)
         for question_data in questions_data:
             Question.objects.create(survey=survey, **question_data)
+
         return survey
+#
 
 
 class QuestionTypeSerializer(serializers.ModelSerializer):
