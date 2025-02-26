@@ -7,5 +7,5 @@ urlpatterns = [
     path('drf-auth/', include('rest_framework.urls')),
     path('auth/', include('djoser.urls')),
     path('register/', api.RegisterAPIView.as_view(), name='api_register'),
-    path('surveys/', SurveyCreateView.as_view(), name='survey-create'),
+    path('surveys_construct/', SurveyCreateView.as_view(), name='survey-create'),
 ]

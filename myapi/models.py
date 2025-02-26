@@ -47,7 +47,7 @@ class Survey(models.Model):
 class Question(models.Model):
     value = models.CharField(max_length=255, verbose_name="Вопрос", db_index=True)
     question_type = models.ForeignKey("QuestionType", on_delete=models.CASCADE, verbose_name="Тип вопроса", related_name="question_type_id")
-    survey = models.ForeignKey("Survey", on_delete=models.CASCADE, related_name="survey_id")
+    survey = models.ForeignKey(Survey, on_delete=models.CASCADE, related_name="questions")
 
     def __str__(self):
         return self.value
