@@ -6,15 +6,15 @@ from rest_framework.views import APIView
 from . import serializers
 from . import models
 from .models import Survey, User
-from .serializers import UserRegistrationSerializer, SurveySerializer, QuestionSerializer, UserSerializer
+from .serializers import UserRegistrationSerializer, SurveySerializer, QuestionSerializer, UserProfileSerializer
 
 
 class UserProfileAPIView(ListAPIView):
-    serializer_class = serializers.UserSerializer
+    serializer_class = UserProfileSerializer
     permission_classes = (IsAuthenticated, )
 
     def get_queryset(self):
-        return models.User.objects.all()
+        return User.objects.filter(id=self.request.user.id)
 
 
 class RegisterAPIView(CreateAPIView):
@@ -32,6 +32,16 @@ class SurveyCreateAPIView(ListCreateAPIView):
 
 
 class UserProfileAPIUpdate(UpdateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = UserProfileSerializer
+    permission_classes = (IsAuthenticated, )
 
+    def get_object(self):
+        return self.request.user
+
+
+class UserSurveysAPIView(ListAPIView):
+    serializer_class = SurveySerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Survey.objects.filter(recipient_user=self.request.user)
