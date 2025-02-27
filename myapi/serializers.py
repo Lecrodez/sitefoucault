@@ -1,16 +1,35 @@
+import re
+
+from django.contrib.auth import get_user_model
 from rest_framework import serializers
-from rest_framework.renderers import JSONRenderer
 
 from .models import User, Survey, AnswerType, Answer, QuestionType, Question
 
 
-class UserSerializer(serializers.ModelSerializer):
+class NameSerializer(serializers.Serializer):
+    first_name = serializers.CharField(max_length=30)
+    last_name = serializers.CharField(max_length=30)
+
+    def validate_name(self, value):
+        """Общая валидация для имени и фамилии."""
+        if not re.match(r'^[А-Яа-яЁё\s-]+$', value):
+            raise serializers.ValidationError("Имя и фамилия должны содержать только русские буквы.")
+        return value
+
+    def validate_first_name(self, value):
+        return self.validate_name(value)
+
+    def validate_last_name(self, value):
+        return self.validate_name(value)
+
+
+class UserProfileSerializer(NameSerializer, serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = "__all__"
+        fields = ['first_name', 'last_name', 'email', 'roles', 'avatar']
 
 
-class UserRegistrationSerializer(serializers.ModelSerializer):
+class UserRegistrationSerializer(NameSerializer, serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
 
     class Meta:

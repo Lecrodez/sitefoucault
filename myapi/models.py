@@ -37,8 +37,8 @@ class Survey(models.Model):
     description = models.CharField(max_length=255, verbose_name="Описание")
     sender_user = models.ForeignKey('User', on_delete=models.CASCADE, verbose_name="Отправитель", related_name="sender_id")
     recipient_user = models.ManyToManyField('User', verbose_name="Получатель", related_name="recipient_id")
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
