@@ -7,7 +7,7 @@ from .models import User, Survey, AnswerType, Answer, QuestionType, Question
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email', 'role_id', 'password']
+        fields = "__all__"
 
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
