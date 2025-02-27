@@ -49,7 +49,6 @@ urlpatterns = [
         name='schema-json'
     ),
     path("admin/", admin.site.urls),
-    path("", include("surveys.urls")),
     path("api/", include('myapi.urls')),
     re_path(r'^auth/', include('djoser.urls.authtoken')),
 ]
