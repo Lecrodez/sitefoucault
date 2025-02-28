@@ -48,6 +48,7 @@ class Question(models.Model):
     value = models.CharField(max_length=255, verbose_name="Вопрос", db_index=True)
     question_type = models.ForeignKey("QuestionType", on_delete=models.CASCADE, verbose_name="Тип вопроса", related_name="question_type_id")
     survey = models.ForeignKey(Survey, on_delete=models.CASCADE, related_name="questions")
+    options = models.JSONField(default=list, blank=True)
 
     def __str__(self):
         return self.value
@@ -65,6 +66,7 @@ class Answer(models.Model):
     answer_type = models.ForeignKey("AnswerType", on_delete=models.CASCADE, related_name="answer_type_id")
     recipient_user = models.ForeignKey("User", on_delete=models.PROTECT, related_name="recipient_user_id")
     question = models.OneToOneField("Question", on_delete=models.CASCADE, related_name="question_id")
+    selected_options = models.JSONField(default=list, blank=True)
 
     def __str__(self):
         return self.value
