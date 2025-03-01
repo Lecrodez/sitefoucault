@@ -12,7 +12,7 @@ Django-приложение для создания и прохождения о
 ## 📊 Структура базы данных  
 Вот схема БД (ER-диаграмма):  
 
-[draw.io](https://github.com/Lecrodez/sitefoucault/blob/main/docs/db_schema.drawio)
+![ER Diagram](https://github.com/Lecrodez/sitefoucault/blob/main/docs/db_schema.drawio)
 
 ## 🚀 Установка и запуск  
 
