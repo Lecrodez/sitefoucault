@@ -28,7 +28,9 @@ pip install -r requirements.txt
 
 3️⃣ Применение миграций
 python manage.py migrate
+
 4️⃣ Создание суперпользователя (если нужно)
 python manage.py createsuperuser
+
 5️⃣ Запуск сервера
 python manage.py runserver
