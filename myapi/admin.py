@@ -14,3 +14,38 @@ class RolesAdmin(admin.ModelAdmin):
 
 
 admin.site.register(models.Roles, RolesAdmin)
+
+
+class SurveyAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(models.Survey, SurveyAdmin)
+
+
+class QuestionAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(models.Question, QuestionAdmin)
+
+
+class QuestionTypeAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(models.QuestionType, QuestionTypeAdmin)
+
+
+class AnswerAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(models.Answer, AnswerAdmin)
+
+
+class AnswerTypeAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(models.AnswerType, AnswerTypeAdmin)
