@@ -19,16 +19,23 @@ Django-приложение для создания и прохождения о
 ### 1️⃣ Клонирование репозитория  
 
 git clone https://github.com/Lecrodez/sitefoucault.git
+
 cd sitefoucault
 
 2️⃣ Установка зависимостей
+
 python -m venv venv
+
 venv\Scripts\activate
+
 pip install -r requirements.txt
 
 3️⃣ Применение миграций
+
 python manage.py migrate
+
 4️⃣ Создание суперпользователя (если нужно)
 python manage.py createsuperuser
+
 5️⃣ Запуск сервера
 python manage.py runserver
