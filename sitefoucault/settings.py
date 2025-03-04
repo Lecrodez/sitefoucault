@@ -9,8 +9,11 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+from decouple import config
 import os
 from pathlib import Path
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-2d=#^ag!t94je1^1hvhwexvh+_&u)u+#e^+n%*ju*&xvr31nlo"
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -83,11 +86,11 @@ WSGI_APPLICATION = "sitefoucault.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'sitefoucault',  # имя вашей базы данных
-        'USER': 'postgres',      # имя пользователя
-        'PASSWORD': '120821',  # пароль пользователя
-        'HOST': 'localhost',    # адрес сервера базы данных
-        'PORT': '5432',         # порт (по умолчанию 5432)
+        'NAME': config('DB_NAME'),  # имя вашей базы данных
+        'USER': config('DB_USER'),      # имя пользователя
+        'PASSWORD': config('DB_PASSWORD'),  # пароль пользователя
+        'HOST': config('DB_HOST'),    # адрес сервера базы данных
+        'PORT': config('DB_PORT'),         # порт (по умолчанию 5432)
     }
 }
 
