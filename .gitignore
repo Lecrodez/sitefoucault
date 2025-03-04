@@ -1,0 +1,20 @@
+# Виртуальные окружения
+../venv/
+
+# Папки с кэшами
+__pycache__/
+*.pyc
+
+# Файлы конфигурации IDE
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Логи
+*.log
+
+# Файлы базы данных
+*.sqlite3
+*.backup
+# Конфиденциальные файлы
+*.env

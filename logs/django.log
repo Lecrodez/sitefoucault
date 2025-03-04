@@ -1,0 +1,4 @@
+WARNING 2025-03-01 18:08:52,496 log Unauthorized: /api/user/me/
+WARNING 2025-03-01 18:08:52,496 basehttp "GET /api/user/me/ HTTP/1.1" 401 49
+WARNING 2025-03-01 18:09:35,847 log Unauthorized: /api/user/me/edit/
+WARNING 2025-03-01 18:09:35,848 basehttp "PUT /api/user/me/edit/ HTTP/1.1" 401 49
